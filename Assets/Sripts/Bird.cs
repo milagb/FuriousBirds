@@ -19,6 +19,5 @@ public class Bird : MonoBehaviour
     {
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y);
-
     }
 }
