@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
+    private Vector3 _initialPosition;
+    
+    private void Awake()
+    {
+        _initialPosition = transform.position;
+    }
+
     private void OnMouseDown()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
