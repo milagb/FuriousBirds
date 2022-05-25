@@ -7,18 +7,28 @@ using UnityEngine.SceneManagement;
 public class Bird : MonoBehaviour
 {
     private Vector3 _initialPosition;
+    private Vector3 nextPosition;
     private bool _birdWasLaunched;
     private float _timiSittinAround;
 
     [SerializeField] private float _launchPower = 600;
 
+    private LineRenderer _lineRenderer;
+
     private void Awake()
     {
         _initialPosition = transform.position;
+        //_initialPosition = new Vector3(0,3,22);
+        //nextPosition = _initialPosition;
+
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
     {
+        _lineRenderer.SetPosition(1, _initialPosition);
+        _lineRenderer.SetPosition(0, transform.position);
+
         if (_birdWasLaunched &&
             GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1f)
         {
@@ -37,6 +47,7 @@ public class Bird : MonoBehaviour
     private void OnMouseDown()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponent<LineRenderer>().enabled = true;
     }
 
     private void OnMouseUp()
@@ -49,6 +60,8 @@ public class Bird : MonoBehaviour
         GetComponent<Rigidbody2D>().gravityScale = 1;
 
         _birdWasLaunched = true;
+
+        GetComponent<LineRenderer>().enabled = false;
     }
 
     private void OnMouseDrag()
