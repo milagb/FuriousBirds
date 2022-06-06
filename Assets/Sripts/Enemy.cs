@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
     [SerializeField] private GameObject _cloudParticlePrefab;
+
     private void OnCollisionEnter2D(Collision2D col)
     {
         //bool didHitBird = col.collider.GetComponent<Bird>() != null;
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         if (bird != null)
         {
             Instantiate(_cloudParticlePrefab, transform.position,
-                quaternion.identity);
+                Quaternion.identity);
             Destroy(gameObject);
             return;
         }
