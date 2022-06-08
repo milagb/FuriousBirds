@@ -9,7 +9,9 @@ public class Bird : MonoBehaviour
     private Vector3 _initialPosition;
     private Vector3 nextPosition;
     private bool _birdWasLaunched;
+    private bool birdWasSplited;
     private float _timiSittinAround;
+    public GameObject myBirdPrefab;
 
     [SerializeField] private float _launchPower = 600;
 
@@ -42,6 +44,22 @@ public class Bird : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }
+
+        if (Input.GetMouseButtonDown(0) && _birdWasLaunched && !birdWasSplited)
+        {
+
+            Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
+            birdWasSplited = true;
+            //MOZI HELP
+            //First i tried this: myBirdPrefab.GetComponent<Rigidbody2D>().velocity;
+            //second this:
+            Vector2 velocity = myBirdPrefab.GetComponent<Rigidbody2D>().velocity;
+
+
+            //MOZI HELP: how unity knows the bird was really splited?
+            //Because before I created the variable birdWasSplited, he was splitting all the times I clicked on the screen
+        }
+
     }
 
     private void OnMouseDown()
@@ -69,4 +87,18 @@ public class Bird : MonoBehaviour
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y);
     }
+
+    // after the bird is launched
+        //DONE detect on mouse down
+            // Instantiate 2 bird prefabs
+                // *DONE How to instantiate a prefab?D
+                // * What is a prefab?
+                // * How to create a prefab?
+            // Set the velocity of the newly instantiated birds
+                // * where is the bird velocity stored? -> in the variable named _launchPower (serialize field)
+                // * How to change the bird velocity? ->
+                // * How to get the velocity of the original bird?
+                // * How to rotate the velocity vector?
+
+
 }
