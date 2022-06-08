@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6929469432762108263}
   - component: {fileID: 6929469432762108262}
   - component: {fileID: 6929469432762108249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GreenBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24a85d632d23b1429811a2ef828caa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myBirdPrefab: {fileID: 0}
   _launchPower: 300
 --- !u!120 &6929469432762108249
 LineRenderer:

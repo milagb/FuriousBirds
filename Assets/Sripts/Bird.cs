@@ -47,19 +47,19 @@ public class Bird : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && _birdWasLaunched && !birdWasSplited)
         {
-
-            Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
-            birdWasSplited = true;
-            //MOZI HELP
-            //First i tried this: myBirdPrefab.GetComponent<Rigidbody2D>().velocity;
-            //second this:
-            Vector2 velocity = myBirdPrefab.GetComponent<Rigidbody2D>().velocity;
-
-
-            //MOZI HELP: how unity knows the bird was really splited?
-            //Because before I created the variable birdWasSplited, he was splitting all the times I clicked on the screen
+            Split();
         }
 
+    }
+
+    private void Split()
+    {
+        birdWasSplited = true;
+        GameObject birdInstantiated =  Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
+
+        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+        //how to rotate velocity vector?????
+        birdInstantiated.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     private void OnMouseDown()
