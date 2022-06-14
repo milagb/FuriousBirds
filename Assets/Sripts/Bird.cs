@@ -55,10 +55,14 @@ public class Bird : MonoBehaviour
     private void Split()
     {
         birdWasSplited = true;
-        GameObject birdInstantiated =  Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
+        GameObject birdInstantiated = Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
+
+        // TODO:
+        // Instantiate 2 birds and make each go a separate direction
+        // Make the velocity direction delta be configurable from the inspector
 
         Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
-        //how to rotate velocity vector?????
+        velocity = Bird.Rotate(velocity, 10 * Mathf.Deg2Rad);
         birdInstantiated.GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
@@ -86,6 +90,13 @@ public class Bird : MonoBehaviour
     {
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y);
+    }
+
+    public static Vector2 Rotate(Vector2 vector, float delta) {
+        return new Vector2(
+            vector.x * Mathf.Cos(delta) - vector.y * Mathf.Sin(delta),
+            vector.x * Mathf.Sin(delta) + vector.y * Mathf.Cos(delta)
+        );
     }
 
     // after the bird is launched
