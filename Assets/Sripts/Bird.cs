@@ -15,6 +15,8 @@ public class Bird : MonoBehaviour
 
     [SerializeField] private float _launchPower = 600;
 
+    [SerializeField] private float velocityDirection;
+
     private LineRenderer _lineRenderer;
 
     private void Awake()
@@ -55,16 +57,30 @@ public class Bird : MonoBehaviour
     private void Split()
     {
         birdWasSplited = true;
-        GameObject birdInstantiated = Instantiate(myBirdPrefab, transform.position, Quaternion.identity);
+
+        InstantiateBird(velocityDirection);
+        InstantiateBird(-velocityDirection);
+
 
         // TODO:
         // Instantiate 2 birds and make each go a separate direction
         // Make the velocity direction delta be configurable from the inspector
 
-        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
-        velocity = Bird.Rotate(velocity, 10 * Mathf.Deg2Rad);
-        birdInstantiated.GetComponent<Rigidbody2D>().velocity = velocity;
+
     }
+
+    private void InstantiateBird(float rotationAngle)
+    {
+        GameObject birdInstantiated = Instantiate(myBirdPrefab,
+            transform.position, Quaternion.identity);
+
+        Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
+        velocity = Bird.Rotate(velocity, rotationAngle * Mathf.Deg2Rad);
+        birdInstantiated.GetComponent<Rigidbody2D>().velocity = velocity;
+
+    }
+
+
 
     private void OnMouseDown()
     {
